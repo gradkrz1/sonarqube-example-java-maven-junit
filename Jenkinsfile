@@ -2,9 +2,18 @@ pipeline {
   agent any
   stages {
     stage('Compile') {
-      steps {
-        sh 'mvn install'
-        echo 'Jest supcio'
+      parallel {
+        stage('Compile') {
+          steps {
+            sh 'mvn install'
+            echo 'Jest supcio'
+          }
+        }
+        stage('') {
+          steps {
+            echo 'Hello'
+          }
+        }
       }
     }
     stage('Test') {
